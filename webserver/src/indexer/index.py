@@ -5,9 +5,7 @@ from common.config import MILVUS_HOST, MILVUS_PORT, VECTOR_DIMENSION
 
 def milvus_client():
     try:
-        milvus = Milvus(host=MILVUS_HOST, port=MILVUS_PORT)
-        # status = milvus.connect(MILVUS_HOST, MILVUS_PORT)
-        return milvus
+        return Milvus(host=MILVUS_HOST, port=MILVUS_PORT)
     except Exception as e:
         log.error(e)
 
@@ -21,8 +19,7 @@ def create_table(client, table_name=None, dimension=VECTOR_DIMENSION,
         'metric_type': metric_type
     }
     try:
-        status = client.create_collection(table_param)
-        return status
+        return client.create_collection(table_param)
     except Exception as e:
         log.error(e)
 
@@ -40,9 +37,7 @@ def insert_vectors(client, table_name, vectors):
 
 def create_index(client, table_name):
     param = {'nlist': 16384}
-    # status = client.create_index(table_name, param)
-    status = client.create_index(table_name, IndexType.IVF_FLAT, param)
-    return status
+    return client.create_index(table_name, IndexType.IVF_FLAT, param)
 
 
 def delete_table(client, table_name):
@@ -58,8 +53,7 @@ def search_vectors(client, table_name, vectors, top_k):
 
 
 def has_table(client, table_name):
-    status = client.has_collection(collection_name=table_name)
-    return status
+    return client.has_collection(collection_name=table_name)
 
 
 def count_table(client, table_name):

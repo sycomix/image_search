@@ -32,6 +32,6 @@ def do_train(table_name, database_path):
         return "Train finished"
     except Exception as e:
         logging.error(e)
-        return "Error with {}".format(e)
+        return f"Error with {e}"
 
 

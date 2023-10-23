@@ -14,9 +14,8 @@ def do_delete(table_name):
         table_name = DEFAULT_TABLE
     try:
         index_client = milvus_client()
-        status = delete_table(index_client, table_name=table_name)
-        return status
+        return delete_table(index_client, table_name=table_name)
     except Exception as e:
         logging.error(e)
-        return "Error with {}".format(e)
+        return f"Error with {e}"
 
